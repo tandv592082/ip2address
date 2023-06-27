@@ -1,7 +1,7 @@
 const analysis = async () => {
     $(`small[id^="error-"]`).hide();
     $(`#table`).hide();
-    disableLayout();
+    
 
     const errorMgs = {};
     const files = $('#file_upload')[0].files;
@@ -46,6 +46,7 @@ const analysis = async () => {
         const reader = new FileReader();
         reader.readAsBinaryString(files[0]);
         reader.onload = async function(e) {
+            disableLayout();
             const data = e.target.result;
             const workbook = XLSX.read(data, {
                 type : 'binary'
@@ -83,14 +84,13 @@ const analysis = async () => {
             const promises = ips.map(getAddressFromIp);
             const result = await Promise.all(promises);
 
+            enableLayout();
             renderTable(result);
             
         }
 
     }catch(e){
         console.error(e);
-    }finally {
-        enableLayout();
     }
 }
 
