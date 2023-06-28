@@ -15,7 +15,7 @@ const analysis = async () => {
         filename = files[0].name;
         const extension = filename.substring(filename.lastIndexOf(".")).toUpperCase();
 
-        if (!(extension === '.XLS' || extension === '.XLSX')) {
+        if (!(extension === '.XLS' || extension === '.XLSX' || extension === '.XLSM')) {
             errorMgs['file_upload'] = "Please select a valid excel file.";
         }
     }
@@ -59,7 +59,6 @@ const analysis = async () => {
                 }
             });
 
-            console.log(excel);
            
             let sheet = excel[sheetName];
 
@@ -83,6 +82,7 @@ const analysis = async () => {
             
             const promises = ips.map(getAddressFromIp);
             const result = await Promise.all(promises);
+            console.log(result);
 
             enableLayout();
             renderTable(result);
@@ -105,7 +105,7 @@ const readFileSync = (file) => new Promise((resolve) => {
 const renderTable = (data) => {
     
     $('#table').dataTable().fnDestroy();
-
+    
     $('#table').show().DataTable({
         data,
         columns: [
