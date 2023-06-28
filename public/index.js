@@ -116,17 +116,15 @@ const renderTable = (data) => {
 
 const getAddressFromIp = async (ip) => {
     console.log(ip);
-    const uri = `http://ip-api.com/json/${ip}`;
-    const response = await fetch(uri);
-    let data  = {};
-    
+    const endpoint = `/ip-to-location/${ip}`;
+    const response = await fetch(endpoint);
+    let data;
 
     if (response.ok) {
-         data = await response.json();
-        
+        data = await response.json();
     }
 
-    const {country, city} = data;
+    const { country, city } = data ?? {};
     return {
         ip,
         city: city ?? 'N/A',
@@ -142,7 +140,7 @@ const disableLayout = () => {
 }
 
 const downloadXLS = (xlsRows) => {
-    $("#table-download-body").empty();   
+    $("#table-download-body").empty();
     const createXLSLFormatObj = [];
 
     /* XLS Head Columns */
@@ -151,7 +149,7 @@ const downloadXLS = (xlsRows) => {
 
     $.each(xlsRows, function (index, value) {
         const innerRowData = [];
-        $("#table-download-body").append('<tr><td>' + value.ip + '</td><td>' + value.city  + '</td><td>' + value.country + '</td></tr>');
+        $("#table-download-body").append('<tr><td>' + value.ip + '</td><td>' + value.city + '</td><td>' + value.country + '</td></tr>');
 
         $.each(value, function (ind, val) {
 
@@ -218,10 +216,3 @@ $('span[id^=explain-').click(function () {
     $('#explain-modal-wrapper').css('display', 'flex');
 });
 
-const bootstrap = () => {
-    $(`small[id^="error-"]`).hide();
-    $(`#table`).hide();
-    $(`#loading`).hide();
-}
-
-bootstrap();
