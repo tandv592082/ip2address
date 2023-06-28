@@ -64,11 +64,13 @@ const analysis = async () => {
 
             if(!sheet) {
                 $(`#error-sheet-name`).show().text(`Sheet ${sheetName} does not exist or contain empty row!`);
+                enableLayout();
                 return;
             }
 
             if(!sheet.length) {
                 $(`#error-sheet-name`).show().text(`Sheet ${sheetName} not contain any row name!`);
+                enableLayout();
                 return;
             }
 
@@ -76,6 +78,7 @@ const analysis = async () => {
 
             if(ips.every(k => k === undefined)) {
                 $(`#error-row-ip-name`).show().text(`Row ${rowName} does not exist!`);
+                enableLayout();
                 return;
             }
 
