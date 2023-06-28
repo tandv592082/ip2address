@@ -2,11 +2,13 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const geoip = require('fast-geoip');
+const path = require('path');
 const { isValidIP, getAddressFromCountryCode } = require('./utils');
 const PORT = '8080';
 
 
-app.use(express.static('./public'));
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors())
 
