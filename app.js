@@ -1,11 +1,14 @@
 const express = require('express');
 const app = express();
-const PORT = '8080';
+const cors = require('cors');
 const geoip = require('fast-geoip');
 const { isValidIP, getAddressFromCountryCode } = require('./utils');
+const PORT = '8080';
 
 
 app.use(express.static('./public'));
+
+app.use(cors())
 
 app.use('/ip-to-location/:ip', async (req, res) => {
     const ip = req.params.ip;

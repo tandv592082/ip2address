@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/tandv592082/ip2address#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "country-code-lookup": "^0.1.0",
     "express": "^4.18.2",
     "fast-geoip": "^1.1.88"
