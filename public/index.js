@@ -115,7 +115,6 @@ const renderTable = (data) => {
 }
 
 const getAddressFromIp = async (ip) => {
-    console.log(ip);
     const endpoint = `/ip-to-location/${ip}`;
     const response = await fetch(endpoint);
     let data;
