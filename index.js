@@ -45,6 +45,7 @@ const analysis = async () => {
     try {
         const reader = new FileReader();
         reader.readAsBinaryString(files[0]);
+
         reader.onload = async function(e) {
             disableLayout();
             const data = e.target.result;
@@ -58,8 +59,7 @@ const analysis = async () => {
                     excel[sheetName] = roa;
                 }
             });
-
-           
+ 
             let sheet = excel[sheetName];
 
             if(!sheet) {
@@ -82,7 +82,6 @@ const analysis = async () => {
             
             const promises = ips.map(getAddressFromIp);
             const result = await Promise.all(promises);
-            console.log(result);
 
             enableLayout();
             renderTable(result);
@@ -94,16 +93,8 @@ const analysis = async () => {
     }
 }
 
-   
-
-const readFileSync = (file) => new Promise((resolve) => {
-    let fileReader = new FileReader();
-    fileReader.onload = (e) => resolve(fileReader.result);
-    fileReader.readAsDataURL(file);
-});
 
 const renderTable = (data) => {
-    
     $('#table').dataTable().fnDestroy();
     
     $('#table').show().DataTable({
@@ -146,6 +137,36 @@ const enableLayout = () => {
     $('input').removeAttr('disabled');
     $('button').removeAttr('disabled');
 }
+
+$('#explain-modal-wrapper').click(() => {
+    $('#explain-modal-wrapper').hide();
+})
+
+$('.explain-modal').click((e) => {
+    e.stopPropagation();
+});
+
+$('.close-modal').click((e) => {
+    $('#explain-modal-wrapper').hide();
+})
+
+
+$('span[id^=explain-').click(function() {
+    switch($(this).attr('id').replace('explain-', '')) {
+        case 'row-ip-name':
+            $('.modal-title').text('IP row name');
+            $(".image-explain").attr("src","./assets/images/row-ip-name.png");
+            break;
+        case 'sheet-name':
+            $('.modal-title').text('Sheet name');
+            $(".image-explain").attr("src","./assets/images/sheet-name.png");
+            break;
+        default:
+            break;
+    }
+
+    $('#explain-modal-wrapper').css('display', 'flex');
+});
 
 const bootstrap = () => {
     $(`small[id^="error-"]`).hide();

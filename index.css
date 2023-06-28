@@ -1,0 +1,42 @@
+span[id^='explain-'] {
+    cursor: pointer;
+}
+
+#explain-modal-wrapper {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.13);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#explain-modal-wrapper .explain-modal {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+    border-radius: 16px;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    height: auto;
+}
+
+#explain-modal-wrapper .modal-title {
+    font-size: 20px;
+}
+
+.close-modal {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 16px;;
+}
+
+#table, #explain-modal-wrapper, #loading {
+    display: none;
+}
