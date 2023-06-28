@@ -37,6 +37,6 @@ span[id^='explain-'] {
     padding-top: 16px;;
 }
 
-#table, #explain-modal-wrapper, #loading {
+#table, #explain-modal-wrapper, #loading, #export2excel, #table-download-temp{
     display: none;
 }
